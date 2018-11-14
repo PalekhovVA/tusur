@@ -17,7 +17,7 @@ public class CheckElement {
      * Проверка элемента попиксельно и по html
      */
     public static boolean checkElement(WebDriver webDriver, String cssSelector, String expectedScreenshotFilePath,
-                                       String expectedHtmlElement, By by) {
+                                       String expectedHtmlElement, By by) throws Exception {
 
         String actualElement = getElement.getElementHtmlCode(webDriver.getPageSource(), cssSelector);
         File actualScreenshotFile = getScreenshot.getElementScreenshot(webDriver, by);

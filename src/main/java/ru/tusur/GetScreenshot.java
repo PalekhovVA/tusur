@@ -23,9 +23,8 @@ public class GetScreenshot {
 
             return file;
         } catch (Exception e) {
-            //todo логирование
             e.printStackTrace();
-            return new File("");
+            return null;
         }
     }
 }

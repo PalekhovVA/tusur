@@ -6,7 +6,6 @@ import ru.tusur.findElement.BySelector;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static junit.framework.TestCase.assertTrue;
 import static ru.tusur.checkElement.CheckElement.checkElement;
 
 public class DemoTests {
@@ -19,15 +18,9 @@ public class DemoTests {
     }
 
     @Test
-    public void fullTest() {
+    public void fullTest() throws Exception {
         checkElement(getWebDriver(), BySelector.byId("wd-_topnews"), expectedScreenshot, expectedElement,
                 org.openqa.selenium.By.cssSelector("#wd-_topnews"));
 
-    }
-
-    @Test
-    public void positiveTest() {
-        assertTrue(checkElement(getWebDriver(), BySelector.byId("wd-_topnews"), expectedScreenshot, expectedElement,
-                org.openqa.selenium.By.cssSelector("#wd-_topnews")));
     }
 }
