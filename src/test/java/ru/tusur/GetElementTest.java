@@ -1,6 +1,7 @@
 package ru.tusur;
 
 import org.junit.Test;
+import org.openqa.selenium.By;
 import ru.tusur.findElement.BySelector;
 
 import static org.junit.Assert.assertEquals;
@@ -20,5 +21,10 @@ public class GetElementTest {
     public void getElementTest() {
         assertEquals("<id=\"string2\" attribute1 attribute2>",
                 getElement.getElementHtmlCode(page, BySelector.byId("string2")));
+    }
+
+    @Test
+    public void getCssSelectorTest() {
+        assertEquals("testId", getElement.getCssSelector(By.id("testId")));
     }
 }

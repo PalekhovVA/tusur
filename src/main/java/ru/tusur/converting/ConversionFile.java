@@ -1,6 +1,16 @@
 package ru.tusur.converting;
 
-public interface ConversionFile {
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 
+public class ConversionFile {
+
+    public static byte[] fileToByteArray(File file) throws Exception {
+        return FileUtils.readFileToByteArray(file);
+    }
+
+    public static void byteArrayToFile(File file, byte[] bytes) throws Exception {
+        FileUtils.writeByteArrayToFile(file, bytes);
+    }
 }

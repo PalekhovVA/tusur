@@ -16,10 +16,10 @@ public class CheckElement {
     /**
      * Проверка элемента попиксельно и по html
      */
-    public static boolean checkElement(WebDriver webDriver, String cssSelector, String expectedScreenshotFilePath,
+    public static boolean checkElement(WebDriver webDriver, String expectedScreenshotFilePath,
                                        String expectedHtmlElement, By by) throws Exception {
 
-        String actualElement = getElement.getElementHtmlCode(webDriver.getPageSource(), cssSelector);
+        String actualElement = getElement.getElementHtmlCode(webDriver.getPageSource(), getElement.getCssSelector(by));
         File actualScreenshotFile = getScreenshot.getElementScreenshot(webDriver, by);
         File expectedScreenshotFile = new File(expectedScreenshotFilePath);
 

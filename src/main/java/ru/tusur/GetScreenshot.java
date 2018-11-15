@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.util.Date;
 
-import static ru.tusur.converting.ConversionFileImpl.byteArrayToFile;
+import static ru.tusur.converting.ConversionFile.byteArrayToFile;
 
 public class GetScreenshot {
     private static final String screenshotFilePath = "actualElement/screenshots/";

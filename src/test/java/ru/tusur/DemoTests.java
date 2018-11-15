@@ -2,7 +2,7 @@ package ru.tusur;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.tusur.findElement.BySelector;
+import org.openqa.selenium.WebDriver;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -10,17 +10,18 @@ import static ru.tusur.checkElement.CheckElement.checkElement;
 
 public class DemoTests {
     private final String expectedElement = "<div id=\"wd-_topnews\" class=\"b-widget-data b-wrapper b-wrapper-\">";
-    private String expectedScreenshot = "expectedElement\\screenshot\\expectedScreenshot.jpeg";
+    private final String expectedScreenshot = "expectedElement\\screenshot\\expectedScreenshot.jpeg";
+    private WebDriver webDriver;
 
     @Before
     public void beforeTest() {
         open("https://yandex.ru/");
+        webDriver = getWebDriver();
     }
 
     @Test
     public void fullTest() throws Exception {
-        checkElement(getWebDriver(), BySelector.byId("wd-_topnews"), expectedScreenshot, expectedElement,
-                org.openqa.selenium.By.cssSelector("#wd-_topnews"));
-
+        checkElement(webDriver, expectedScreenshot, expectedElement,
+                org.openqa.selenium.By.id("wd-_topnews"));
     }
 }
