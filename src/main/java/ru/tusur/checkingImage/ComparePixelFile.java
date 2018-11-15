@@ -1,12 +1,10 @@
 package ru.tusur.checkingImage;
 
+import ru.tusur.SaveFile;
 import ru.tusur.dto.ImageDto;
 import ru.tusur.dto.PixelDto;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +21,7 @@ class ComparePixelFile {
      */
     boolean comparePixelDtoList(ImageDto expectedImageDto, ImageDto actualImageDto) throws Exception {
         int listSize;
+        int badPixelCount = 0;
         boolean result = true;
         if (actualImageDto.getPixelDtoList().size() == expectedImageDto.getPixelDtoList().size()) {
             listSize = actualImageDto.getPixelDtoList().size();
@@ -34,6 +33,7 @@ class ComparePixelFile {
             if (!expectedImageDto.getPixelDtoList().get(i).getColor()
                     .equals(actualImageDto.getPixelDtoList().get(i).getColor())) {
                 result = false;
+                badPixelCount++;
                 actualImageDto.getPixelDtoList().add(PixelDto.builder()
                         .x(actualImageDto.getPixelDtoList().get(i).getX())
                         .y(actualImageDto.getPixelDtoList().get(i).getY())
@@ -43,7 +43,8 @@ class ComparePixelFile {
         }
 
         if (!result) {
-            createNotValidImage(actualImageDto);
+            throw new AssertionError("Актуальный файл не совпадает с эталонным.\n" +
+                    " Количество совпавших пикселей: " + createNotValidImage(actualImageDto, badPixelCount) + "%");
         }
 
         return result;
@@ -52,32 +53,30 @@ class ComparePixelFile {
     /**
      * Создание файла с не совпадающими пикселями
      */
-    private boolean createNotValidImage(ImageDto imageDto) {
-        return writeImageFile(imageDto.getPixelDtoList(),
-                imageDto.getMaxX(), imageDto.getMaxY());
+    private float createNotValidImage(ImageDto imageDto, int badPixelSize) throws Exception {
+        writeImageFile(imageDto.getPixelDtoList(), imageDto.getMaxX(), imageDto.getMaxY());
+        return procent(badPixelSize, imageDto.getPixelDtoList().size());
     }
 
     /**
      * Сохранение файла в формате JPEG
-     *
      * @param pixelDtoList
      * @param maxX
      * @param maxY
      * @return
      */
-    private boolean writeImageFile(List<PixelDto> pixelDtoList, int maxX, int maxY) {
-        try {
+    private void writeImageFile(List<PixelDto> pixelDtoList, int maxX, int maxY) throws Exception {
             BufferedImage image = new BufferedImage(maxX, maxY, BufferedImage.TYPE_INT_RGB);
             for (PixelDto pixelDto : pixelDtoList) {
                 image.setRGB(pixelDto.getX(), pixelDto.getY(), pixelDto.getColor().getRGB());
             }
-            ImageIO.write(image, "jpg", new File(filePath
-                    + "testFailed" + new Date().getTime() + ".jpg"));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+
+        SaveFile.saveFileToJpeg(image, filePath, "TestFail_Screenshot" + new Date().getTime());
     }
+
+    private float procent(float q, float w) {
+        return (q / w) * 100;
+    }
+
 
 }

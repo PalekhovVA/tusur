@@ -10,10 +10,9 @@ public class GetScreenshotTest {
     private GetScreenshot getScreenshot = new GetScreenshot();
 
     @Test
-    public void getElementScreenshotTest() throws InterruptedException {
+    public void getElementScreenshotTest() throws Exception {
         open("https://yandex.ru/");
         getScreenshot.getElementScreenshot(getWebDriver(), By.cssSelector("#wd-_topnews"));
-
     }
 
 }

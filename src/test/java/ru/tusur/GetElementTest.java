@@ -2,7 +2,6 @@ package ru.tusur;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import ru.tusur.findElement.BySelector;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,16 +10,10 @@ public class GetElementTest {
     private GetElement getElement = new GetElement();
 
     @Test
-    public void getElementHtml() throws Exception {
+    public void getElementHtml() {
 
         assertEquals("<id=\"string2\" attribute1 attribute2>",
                 getElement.getElementHtmlCode(page, "id=\"string2\""));
-    }
-
-    @Test
-    public void getElementTest() {
-        assertEquals("<id=\"string2\" attribute1 attribute2>",
-                getElement.getElementHtmlCode(page, BySelector.byId("string2")));
     }
 
     @Test

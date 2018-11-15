@@ -20,7 +20,7 @@ public class DemoTests {
     }
 
     @Test
-    public void fullTest() throws Exception {
+    public void fullTest() {
         checkElement(webDriver, expectedScreenshot, expectedElement,
                 org.openqa.selenium.By.id("wd-_topnews"));
     }
