@@ -9,9 +9,9 @@ import ru.tusur.checkingImage.CheckingScreenshot;
 import java.io.File;
 
 public class CheckElement {
-    private static final GetElement getElement = new GetElement();
-    private static final GetScreenshot getScreenshot = new GetScreenshot();
-    private static final CheckingScreenshot checkingScreenshot = new CheckingScreenshot();
+    private static GetElement getElement = new GetElement();
+    private static GetScreenshot getScreenshot = new GetScreenshot();
+    private static CheckingScreenshot checkingScreenshot = new CheckingScreenshot();
 
     /**
      * Проверка элемента попиксельно и по html

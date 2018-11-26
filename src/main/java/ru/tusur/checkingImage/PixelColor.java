@@ -10,8 +10,8 @@ class PixelColor {
     }
 
     static Color getPixelColor(BufferedImage bi, int x, int y) {
-        Object colorData = bi.getRaster().getDataElements(x, y, null);//данные о пикселе
-        int argb = bi.getColorModel().getRGB(colorData);//преобразование данных в цветовое значение
+        Object colorData = bi.getRaster().getDataElements(x, y, null);
+        int argb = bi.getColorModel().getRGB(colorData);
         return new Color(argb, true);
     }
 

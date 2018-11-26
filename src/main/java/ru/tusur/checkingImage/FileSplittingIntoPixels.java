@@ -16,7 +16,7 @@ class FileSplittingIntoPixels {
 
     ImageDto splittingImageIntoPixels(File file) {
         try {
-            List<PixelDto> pixelDtoList = new ArrayList<PixelDto>();
+            List<PixelDto> pixelDtoList = new ArrayList<>();
             BufferedImage img = ImageIO.read(file);
             int minX = img.getMinX();
             int minY = img.getMinY();

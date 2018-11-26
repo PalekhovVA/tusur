@@ -9,12 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 import static ru.tusur.checkingImage.PixelColor.getRedColor;
-
+import static ru.tusur.properties.GetProperties.failedScreenshotFilePath;
 /**
  * Попиксельное сравнение файла
  */
 class ComparePixelFile {
-    private final String filePath = "failTestResult/screenshots/";
 
     /**
      * Сравнение пикселей файла
@@ -55,15 +54,11 @@ class ComparePixelFile {
      */
     private float createNotValidImage(ImageDto imageDto, int badPixelSize) throws Exception {
         writeImageFile(imageDto.getPixelDtoList(), imageDto.getMaxX(), imageDto.getMaxY());
-        return procent(badPixelSize, imageDto.getPixelDtoList().size());
+        return interestCalculation(badPixelSize, imageDto.getPixelDtoList().size());
     }
 
     /**
      * Сохранение файла в формате JPEG
-     * @param pixelDtoList
-     * @param maxX
-     * @param maxY
-     * @return
      */
     private void writeImageFile(List<PixelDto> pixelDtoList, int maxX, int maxY) throws Exception {
             BufferedImage image = new BufferedImage(maxX, maxY, BufferedImage.TYPE_INT_RGB);
@@ -71,12 +66,13 @@ class ComparePixelFile {
                 image.setRGB(pixelDto.getX(), pixelDto.getY(), pixelDto.getColor().getRGB());
             }
 
-        SaveFile.saveFileToJpeg(image, filePath, "TestFail_Screenshot" + new Date().getTime());
+        SaveFile.saveFileToJpeg(image, failedScreenshotFilePath, "TestFail_Screenshot" + new Date().getTime());
     }
 
-    private float procent(float q, float w) {
-        return (q / w) * 100;
+    /**
+     *
+     */
+    private float interestCalculation(float badPixelCount, float allPixelCount) {
+        return (badPixelCount / allPixelCount) * 100;
     }
-
-
 }

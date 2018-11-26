@@ -18,6 +18,9 @@ public class GetElement {
         else return page.substring(firstTag, secondTag + 1);
     }
 
+    /**
+     * Получение CSS селектора
+     */
     public String getCssSelector(By by) throws AssertionError {
         String prefix = getPrefix(by.toString());
         String selector = by.toString();
@@ -26,7 +29,7 @@ public class GetElement {
                 return getSelector(selector);
 
             case "By.cssSelector":
-                return ""; //todo
+                return ""; //todo добавить распознование селекторов
         }
 
         throw new AssertionError("Не верный тип селектора");
